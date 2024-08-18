@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-permalink":"resume/2024/","permalink":"/resume/2024/","title":"Jeffrey Chen's Resume","tags":["gardenEntry"],"dgHomeLink":true,"dgShowBacklinks":true,"dgShowFileTree":true,"dgEnableSearch":true,"dgShowTags":true}
+{"dg-publish":true,"dg-permalink":"resume/2024/","permalink":"/resume/2024/","title":"Jeffrey Chen's Resume","tags":["gardenEntry"],"dgHomeLink":true,"dgShowFileTree":true,"dgEnableSearch":true,"dgShowTags":true}
 ---
 
 
