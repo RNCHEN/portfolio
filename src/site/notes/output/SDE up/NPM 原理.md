@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-permalink":"SDE/2024/npm-theory","permalink":"/SDE/2024/npm-theory/","title":"NPM Theory"}
+{"dg-publish":true,"dg-permalink":"SDE/2024/npm-theory","permalink":"/SDE/2024/npm-theory/","title":"NPM Theory","dgHomeLink":true,"dgShowBacklinks":true,"dgShowFileTree":true,"dgEnableSearch":true,"dgShowToc":true,"dgShowTags":true}
 ---
 
 
