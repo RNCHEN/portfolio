@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"dg-permalink":"SDE/2024/npm-theory","permalink":"/SDE/2024/npm-theory/","title":"NPM Theory","tags":["gardenEntry"]}
+{"dg-publish":true,"dg-permalink":"SDE/2024/npm-theory","permalink":"/SDE/2024/npm-theory/","title":"NPM Theory"}
 ---
 
 
