@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Jeffrey Chen&#39;s Resume</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdn.jsdelivr.net/npm/lucide@0.115.0/dist/umd/lucide.min.js"></script>
+<script>window.addEventListener("load",(()=>{document.querySelectorAll(".callout").forEach((e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("icon-name",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}})),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((e=>{e.querySelector(".callout-title").addEventListener("click",(t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")}))}))}))</script>
+<script async src="https://fastly.jsdelivr.net/npm/force-graph@1.43.0/dist/force-graph.min.js"></script>
+<script async src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js" async></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
+<script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+<link href="/styles/digital-garden-base.css" rel="stylesheet">
+<link href="/styles/obsidian-base.css" rel="stylesheet">
+<link href="&#92;styles&#92;_theme.74516f71.css" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style></style>
+</head>
+<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
+<div x-init="isDesktop = (window.innerWidth>=1400) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1400) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
+<div x-show.important="!isDesktop" style="display:none">
+<nav class="navbar">
+<div class="navbar-inner">
+<span style="font-size:1.5rem;margin-right:10px" @click="showFilesMobile=!showFilesMobile"><i icon-name="menu"></i></span>
+<a href="/" style="text-decoration:none">
+<h1 style="margin:15px!important">Baby Shark</h1>
+</a>
+</div>
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</nav>
+</div>
+<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
+<nav class="filetree-sidebar" x-show.important="isDesktop || showFilesMobile" style="display:none">
+<a href="/" style="text-decoration:none">
+<h1 style="text-align:center">Baby Shark</h1>
+</a>
+<div style="display:flex;justify-content:center">
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</div>
+<div class="folder" x-data="{isOpen: true}">
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('output')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">output</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('output/SDE up')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">SDE up</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/SDE/2024/npm-theory/">NPM Theory </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/SDE/2024/high-concurrenct/">High Concurrency </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/">Jeffrey Chen&#39;s Resume </a>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<div class="search-container" id="globalsearch" onclick="toggleSearch()">
+<div class="search-box">
+<input type="search" id="term" placeholder="Start typing...">
+<div id="search-results"></div>
+<footer class="search-box-footer">
+<div class="navigation-hint">
+<span>Enter to select</span>
+</div>
+<div class="navigation-hint align-icon">
+<i icon-name="arrow-up" aria-hidden="true"></i>
+<i icon-name="arrow-down" aria-hidden="true"></i>
+<span>to navigate</span>
+</div>
+<div class="navigation-hint">
+<span>ESC to close</span>
+</div>
+</footer>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2024-08-20T01:56:14.992Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2024-08-20T01:56:14.992Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2024-08-20T01:56:14.992Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<main class="content cm-s-obsidian">
+<header>
+<div class="header-meta">
+<div class="header-tags">
+</div>
+</div>
+</header>
+<h1 id="jeffrey-chen" tabindex="-1">JEFFREY CHEN</h1>
+<p>412-390-7892 | <a href="mailto:weigenc@andrew.cmu.edu" target="_blank" class="external-link">weigenc@andrew.cmu.edu</a><br>
+<a href="https://github.com/RNCHEN" target="_blank" class="external-link">GitHub</a> | <a href="https://linkedin.com/in/weigenchen" target="_blank" class="external-link">LinkedIn</a></p>
+<hr>
+<h2 id="education" tabindex="-1">EDUCATION</h2>
+<p><strong>Carnegie Mellon University</strong>, Pittsburgh, PA<br>
+Master of Science in Electrical and Computer Engineering (3.8/4)<br>
+Expected May 2025</p>
+<p><strong>University of Electronic Science and Technology of China</strong>, Chengdu, China<br>
+Bachelor of Science in Software Engineering (3.88/4)<br>
+September 2019 - June 2023</p>
+<hr>
+<h2 id="skills" tabindex="-1">SKILLS</h2>
+<p><strong>Programming Languages</strong>: Java, Go, Python, SQL, JavaScript, TypeScript, Rust, C, Bash, R<br>
+<strong>Frameworks &amp; Databases</strong>: MySQL, MongoDB, Redis, Elasticsearch, Spring, Django, Fiber, Node.js, React, Next.js<br>
+<strong>Cloud &amp; Tools</strong>: AWS, Spark, SAP Hana, Hadoop, GCP, Docker, Kubernetes, Nginx, Jenkins, CI/CD, GraphQL</p>
+<hr>
+<h2 id="working-experience" tabindex="-1">WORKING EXPERIENCE</h2>
+<p><strong>Cepton</strong>, San Jose, CA<br>
+<em>Software Engineer Intern</em><br>
+May 2024 - August 2024</p>
+<ul>
+<li>Refactored an internal developer website from React to <strong>Next.js</strong>, employing a Static Site Generator to enhance First Contentful Paint times by <strong>40%</strong> and integrating <strong>CDN</strong> to reduce server load.</li>
+<li>Replaced a C++ test system with <strong>Rust</strong> to enhance memory safety, concurrency handling, and maintainability.</li>
+<li>Enhanced system reliability and data integrity through a validation-first approach, enabling concurrent downloading.</li>
+<li>Established a <strong>CI/CD</strong> pipeline utilizing Docker, Jenkins, and GitHub Actions to accelerate release cycles by 20%.</li>
+</ul>
+<p><strong>Carnegie Mellon University - Software and Societal Systems Department</strong>, Pittsburgh, PA<br>
+<em>Software Engineer Developer</em><br>
+January 2024 - May 2024</p>
+<ul>
+<li>Developed a high-performance data collection system leveraging <strong>Fiber</strong> for optimal CPU core utilization and reduced memory leakage, enhanced with <strong>MongoDB</strong> using indexed data storage for performance optimization.</li>
+<li>Enhanced response efficiency by 70% by switching from RESTful to <strong>GraphQL</strong> API, optimizing data retrieval processes.</li>
+<li>Implemented browser storage, skeleton screens, and lazy loading in <strong>React</strong> to enhance user experience by reducing load times and providing seamless visual feedback.</li>
+</ul>
+<p><strong>SAP</strong>, Chengdu, China<br>
+<em>Software Engineer Intern</em><br>
+September 2022 - April 2023</p>
+<ul>
+<li>Led the migration of employment timesheet selection feature to a Node.js API service for <strong>batching processing</strong> and asynchronous computations, optimizing the response time by 80% and significantly enhancing user experience.</li>
+<li>Introduced an authentication mechanism for private data upload using <strong>CSRF</strong> token, ensuring encryption in transit.</li>
+<li>Refactored the time-tracking API service on <strong>S4 HANA</strong> by migrating from a row-based to a <strong>columnar</strong> database architecture, resulting in a 10% increase in response speed.</li>
+</ul>
+<p><strong>Data Dream Technology Company</strong>, Hangzhou, China<br>
+<em>Software Engineer Intern</em><br>
+February 2022 - August 2022</p>
+<ul>
+<li>Constructed a secure rental system with integrated authentications using <strong>Spring Security</strong>, <strong>React</strong>, <strong>OAuth2.0</strong>, and <strong>JWT</strong>. Adhered to Agile methodologies throughout the software development life cycle.</li>
+<li>Applied lazy loading and advanced pagination, enhancing the user experience and system performance by <strong>25%</strong>.</li>
+<li>Introduced a <strong>Redis</strong> cache for news metadata search results, reducing search time by 46%.</li>
+</ul>
+<hr>
+<h2 id="projects" tabindex="-1">PROJECTS</h2>
+<p><strong>ETL Optimization and Kubernetes Scheduling</strong><br>
+March 2024 - April 2024</p>
+<ul>
+<li>Developed a distributed machine learning pipeline for <strong>LLM</strong> inference using Apache <strong>Spark</strong>, deployed on <strong>AWS</strong>, to handle a complex <strong>60GB</strong> dataset with over <strong>800 million</strong> features, utilizing <strong>HDFS</strong> for scalable data management.</li>
+<li>Advanced data handling by implementing an <strong>inverted index</strong> and optimizing joins in RDDs to reduce data shuffling, solving <strong>OOM</strong> issues and cutting gradient descent training time by 60%.</li>
+<li>Implemented an advanced <strong>Kubernetes</strong> scheduler for managing both CPU and GPU machines, optimizing resource allocation for MPI and ML jobs, reducing Job Completion Time by 60%.</li>
+</ul>
+<p><strong>High-Performance Proxy Server</strong><br>
+February 2024 - March 2024</p>
+<ul>
+<li>Implemented a multi-threaded, cache-designed proxy server in <strong>C</strong> using mutexes, read-write locks, and producer-consumer synchronization to ensure data consistency in high-concurrency environments.</li>
+<li>Engineered a cache simulator to store web response objects, using <strong>LRU</strong> replacement policy and following a write-back, write allocate policy, boosting proxy server throughput by <strong>30%</strong>.</li>
+</ul>
+</main>
+<style>#tooltip-wrapper{background:var(--background-primary);padding:1em;border-radius:4px;overflow:hidden;position:fixed;width:80%;max-width:400px;height:auto;max-height:300px;font-size:.8em;box-shadow:0 5px 10px rgba(0,0,0,.1);opacity:0;transition:opacity .1s;unicode-bidi:plaintext;overflow-y:scroll;z-index:10}#tooltip-wrapper:after{content:"";position:absolute;z-index:1;bottom:0;left:0;pointer-events:none;width:100%;unicode-bidi:plaintext;height:75px}</style>
+<div style="opacity:0;display:none" id="tooltip-wrapper">
+<div id="tooltip-content">
+</div>
+</div>
+<iframe style="display:none;height:0;width:0" id="link-preview-iframe" src="">
+</iframe>
+<script>var opacityTimeout,contentTimeout,transitionDurationMs=100,iframe=document.getElementById("link-preview-iframe"),tooltipWrapper=document.getElementById("tooltip-wrapper"),tooltipContent=document.getElementById("tooltip-content"),linkHistories={};function hideTooltip(){opacityTimeout=setTimeout((function(){tooltipWrapper.style.opacity=0,contentTimeout=setTimeout((function(){tooltipContent.innerHTML="",tooltipWrapper.style.display="none"}),transitionDurationMs+1)}),transitionDurationMs)}function showTooltip(t){var e=t.target,o=e.getClientRects()[e.getClientRects().length-1],i=window.pageYOffset||document.documentElement.scrollTop,n=t.target.getAttribute("href");if(-1===n.indexOf("http")||-1!==n.indexOf(window.location.host)){let t=n.split("#")[0];linkHistories[t]?(tooltipContent.innerHTML=linkHistories[t],tooltipWrapper.style.display="block",setTimeout((function(){if(tooltipWrapper.style.opacity=1,-1!=n.indexOf("#")){let t=n.split("#")[1];const e=tooltipWrapper.querySelector(`[id='${t}']`);e.classList.add("referred"),e.scrollIntoView({behavior:"smooth"},!0)}else tooltipWrapper.scroll(0,0)}),1)):(iframe.src=t,iframe.onload=function(){tooltipContentHtml="",tooltipContentHtml+='<div style="font-weight: bold; unicode-bidi: plaintext;">'+iframe.contentWindow.document.querySelector("h1").innerHTML+"</div>",tooltipContentHtml+=iframe.contentWindow.document.querySelector(".content").innerHTML,tooltipContent.innerHTML=tooltipContentHtml,linkHistories[t]=tooltipContentHtml,tooltipWrapper.style.display="block",tooltipWrapper.scrollTop=0,setTimeout((function(){if(tooltipWrapper.style.opacity=1,-1!=n.indexOf("#")){let t=n.split("#")[1];const e=tooltipWrapper.querySelector(`[id='${t}']`);e.classList.add("referred"),console.log(e),e.scrollIntoView({behavior:"smooth"},!0)}else tooltipWrapper.scroll(0,0)}),1)}),tooltipWrapper.style.left=o.left-tooltipWrapper.offsetWidth/2+o.width/2+"px",window.innerHeight-o.top<tooltipWrapper.offsetHeight?tooltipWrapper.style.top=o.top+i-tooltipWrapper.offsetHeight-10+"px":window.innerHeight-o.top>tooltipWrapper.offsetHeight&&(tooltipWrapper.style.top=o.top+i+35+"px"),o.left+o.width/2<tooltipWrapper.offsetWidth/2?tooltipWrapper.style.left="10px":document.body.clientWidth-o.left-o.width/2<tooltipWrapper.offsetWidth/2&&(tooltipWrapper.style.left=document.body.clientWidth-tooltipWrapper.offsetWidth-20+"px")}}function setupListeners(t){t.addEventListener("mouseleave",(function(t){hideTooltip()})),tooltipWrapper.addEventListener("mouseleave",(function(t){hideTooltip()})),t.addEventListener("mouseenter",(function(t){clearTimeout(opacityTimeout),clearTimeout(contentTimeout),showTooltip(t)})),tooltipWrapper.addEventListener("mouseenter",(function(t){clearTimeout(opacityTimeout),clearTimeout(contentTimeout)}))}window.addEventListener("load",(function(t){document.querySelectorAll(".internal-link").forEach(setupListeners),document.querySelectorAll(".backlink-card a").forEach(setupListeners)}))</script>
+<script>lucide.createIcons({attrs:{class:["svg-icon"]}})</script>
+</body>
+</html>

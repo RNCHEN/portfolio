@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>NPM Theory</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script async type="module">import mermaid from"https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js" integrity="sha512-hpZ5pDCF2bRCweL5WoA0/N1elet1KYL5mx3LP555Eg/0ZguaHawxNvEjF6O3rufAChs16HVNhEc6blF/rZoowQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-sv0slik/5O0JIPdLBCR2A3XDg/1U3WuDEheZfI/DI5n8Yqc3h5kjrnr46FGBNiUAJF7rE4LHKwQ/SoSLRKAxEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script async src="https://cdn.jsdelivr.net/npm/lucide@0.115.0/dist/umd/lucide.min.js"></script>
+<script>window.addEventListener("load",(()=>{document.querySelectorAll(".callout").forEach((e=>{const t=getComputedStyle(e).getPropertyValue("--callout-icon"),l=t&&t.trim().replace(/^lucide-/,"");if(l){const t=e.querySelector(".callout-title");if(t){const e=document.createElement("div"),c=document.createElement("i");e.appendChild(c),c.setAttribute("icon-name",l),e.setAttribute("class","callout-icon"),t.insertBefore(e,t.firstChild)}}})),lucide.createIcons(),Array.from(document.querySelectorAll(".callout.is-collapsible")).forEach((e=>{e.querySelector(".callout-title").addEventListener("click",(t=>{e.classList.contains("is-collapsed")?e.classList.remove("is-collapsed"):e.classList.add("is-collapsed")}))}))}))</script>
+<script async src="https://fastly.jsdelivr.net/npm/force-graph@1.43.0/dist/force-graph.min.js"></script>
+<script async src="https://fastly.jsdelivr.net/npm/@alpinejs/persist@3.11.1/dist/cdn.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js" async></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" async>
+<script src="https://fastly.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+<link href="/styles/digital-garden-base.css" rel="stylesheet">
+<link href="/styles/obsidian-base.css" rel="stylesheet">
+<link href="&#92;styles&#92;_theme.74516f71.css" rel="stylesheet">
+<link href="/styles/custom-style.css" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style></style>
+</head>
+<body class="theme-dark markdown-preview-view markdown-rendered markdown-preview-section">
+<div x-init="isDesktop = (window.innerWidth>=1400) ? true: false;" x-on:resize.window="isDesktop = (window.innerWidth>=1400) ? true : false;" x-data="{isDesktop: true, showFilesMobile: false}">
+<div x-show.important="!isDesktop" style="display:none">
+<nav class="navbar">
+<div class="navbar-inner">
+<span style="font-size:1.5rem;margin-right:10px" @click="showFilesMobile=!showFilesMobile"><i icon-name="menu"></i></span>
+<a href="/" style="text-decoration:none">
+<h1 style="margin:15px!important">Baby Shark</h1>
+</a>
+</div>
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</nav>
+</div>
+<div x-show="showFilesMobile && !isDesktop" @click="showFilesMobile = false" style="display:none" class="fullpage-overlay"></div>
+<nav class="filetree-sidebar" x-show.important="isDesktop || showFilesMobile" style="display:none">
+<a href="/" style="text-decoration:none">
+<h1 style="text-align:center">Baby Shark</h1>
+</a>
+<div style="display:flex;justify-content:center">
+<div class="search-button align-icon" onclick="toggleSearch()">
+<span class="search-icon">
+<i icon-name="search"></i>
+</span>
+<span class="search-text">
+<span>Search</span>
+<span style="font-size:.6rem;padding:2px 2px 0 6px;text-align:center;transform:translateY(4px)" class="search-keys">
+CTRL + K
+</span>
+</span>
+</div>
+</div>
+<div class="folder" x-data="{isOpen: true}">
+<div x-show="isOpen" style="display:none" class="">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('output')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">output</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div class="folder inner-folder" x-data="{isOpen: $persist(false).as('output/SDE up')}" @click.stop="isOpen=!isOpen">
+<div class="foldername-wrapper align-icon">
+<i x-show="isOpen" style="display:none" icon-name="chevron-down"></i>
+<i x-show="!isOpen" icon-name="chevron-right"></i>
+<span class="foldername">SDE up</span>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink active-note"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/SDE/2024/npm-theory/">NPM Theory </a>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="filelist">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/SDE/2024/high-concurrenct/">High Concurrency </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div x-show="isOpen" style="display:none" class="">
+<div @click.stop class="notelink"><i icon-name="sticky-note" aria-hidden="true"></i><a data-note-icon="" style="text-decoration:none" class="filename" href="/">Jeffrey Chen&#39;s Resume </a>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<div class="search-container" id="globalsearch" onclick="toggleSearch()">
+<div class="search-box">
+<input type="search" id="term" placeholder="Start typing...">
+<div id="search-results"></div>
+<footer class="search-box-footer">
+<div class="navigation-hint">
+<span>Enter to select</span>
+</div>
+<div class="navigation-hint align-icon">
+<i icon-name="arrow-up" aria-hidden="true"></i>
+<i icon-name="arrow-down" aria-hidden="true"></i>
+<span>to navigate</span>
+</div>
+<div class="navigation-hint">
+<span>ESC to close</span>
+</div>
+</footer>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js"></script>
+<script>document.addEventListener("DOMContentLoaded",init,!1),document.addEventListener("DOMContentLoaded",setCorrectShortcut,!1),window.toggleSearch=function(){document.getElementById("globalsearch").classList.contains("active")?document.getElementById("globalsearch").classList.remove("active"):(document.getElementById("globalsearch").classList.add("active"),document.getElementById("term").focus())},window.toggleTagSearch=function(e){console.log(e.textContent);const t=e.textContent;t&&(window.document.getElementById("term").value=t.trim(),window.toggleSearch(),window.search())};const loadingSvg='\n    <svg width="100" height="100" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="#fff">\n      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="1.5s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="1.5s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="1.5s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="6" stroke-opacity="0">\n              <animate attributeName="r"\n                   begin="3s" dur="3s"\n                   values="6;22"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-opacity"\n                   begin="3s" dur="3s"\n                   values="1;0" calcMode="linear"\n                   repeatCount="indefinite" />\n              <animate attributeName="stroke-width"\n                   begin="3s" dur="3s"\n                   values="2;0" calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n          <circle cx="22" cy="22" r="8">\n              <animate attributeName="r"\n                   begin="0s" dur="1.5s"\n                   values="6;1;2;3;4;5;6"\n                   calcMode="linear"\n                   repeatCount="indefinite" />\n          </circle>\n      </g>\n  </svg>';function debounce(e,t,n){var a;return function(){var r=this,i=arguments,c=n&&!a;clearTimeout(a),a=setTimeout((function(){a=null,n||e.apply(r,i)}),t),c&&e.apply(r,i)}}function setCorrectShortcut(){navigator.platform.toUpperCase().indexOf("MAC")>=0&&document.querySelectorAll(".search-keys").forEach((e=>e.innerHTML="⌘ + K"))}function createIndex(e){const t=e=>e.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/),n=new FlexSearch.Document({cache:!0,charset:"latin:extra",optimize:!0,index:[{field:"content",tokenize:"reverse",encode:t},{field:"title",tokenize:"forward",encode:t},{field:"tags",tokenize:"forward",encode:t}]});return e.forEach(((e,t)=>{n.add({id:t,title:e.title,content:e.content,tags:e.tags})})),n}async function init(){let e=!0;if(localStorage.getItem("searchIndex")){let{date:t,docs:n}=JSON.parse(localStorage.getItem("searchIndex"));if("2024-08-20T01:56:14.992Z"===t){e=!1;let t=createIndex(n);window.docs=n,window.index=t}}if(e){let e=await(await fetch("/searchIndex.json?v=2024-08-20T01:56:14.992Z")).json(),t=createIndex(e);localStorage.setItem("searchIndex",JSON.stringify({date:"2024-08-20T01:56:14.992Z",docs:e})),window.docs=e,window.index=t}document.addEventListener("keydown",(e=>{if((e.ctrlKey||e.metaKey)&&"k"===e.key&&(e.preventDefault(),toggleSearch()),"Escape"===e.key&&document.getElementById("globalsearch").classList.remove("active"),document.getElementById("globalsearch").classList.contains("active")){if("ArrowDown"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.nextElementSibling?t.nextElementSibling.classList.add("active"):document.querySelector(".searchresult").classList.add("active")):document.querySelector(".searchresult").classList.add("active");let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("ArrowUp"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t?(t.classList.remove("active"),t.previousElementSibling?t.previousElementSibling.classList.add("active"):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling||e.classList.add("active")}))):document.querySelectorAll(".searchresult").forEach((e=>{e.nextElementSibling&&e.classList.add("active")}));let n=document.querySelector(".searchresult.active");n&&n.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"})}if("Enter"===e.key){e.preventDefault();let t=document.querySelector(".searchresult.active");t&&(window.location.href=t.querySelector("a").href)}}}));const t=debounce(search,200,!1);field=document.querySelector("#term"),field.addEventListener("keydown",(e=>{"ArrowDown"!==e.key&&"ArrowUp"!==e.key&&t()})),resultsDiv=document.querySelector("#search-results");const n=new URL(location.href).searchParams;n.get("q")&&(field.setAttribute("value",n.get("q")),toggleSearch(),search())}async function search(){let e=field.value.trim();if(!e)return;if(e==lastSearch)return;console.log(`search for ${e}`),window.lastSearch=e,resultsDiv.innerHTML=loadingSvg;let t=offlineSearch(e),n="";if(!t.length){let t=document.createElement("p");return t.innerText=`No results for "${e}"`,resultsDiv.innerHTML="",void resultsDiv.appendChild(t)}n+='<div style="max-width:100%;">',t.forEach((e=>{e.tags&&e.tags.length>0?n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        <div class="header-meta">\n                            <div class="header-tags">\n                                ${e.tags.map((e=>'<a class="tag" href="JavaScript:Void(0);">#'+e+"</a>")).join("")}\n                            </div>\n                        </div>\n                        ${e.content}\n                    </div>\n                </div>`:n+=`<div class="searchresult">\n                    <a class="search-link" href="${e.url}">${e.title}</a>\n                    <div onclick="window.location='${e.url}'">\n                        ${e.content}\n                    </div>\n                </div>`})),n+="</div>",resultsDiv.innerHTML=n}function truncate(e,t){return(e=e.replaceAll(/<[^>]*>/g,"")).length<t?e:e.substring(0,t-3)+"..."}function offlineSearch(e){let t=window.docs,n="#"===e[0]&&e.length>1?index.search(e.substring(1),[{field:"tags"}]):index.search(e,[{field:"title",limit:5},{field:"content",weight:10}]);const a=e=>{const t=n.filter((t=>t.field===e));return 0===t.length?[]:[...t[0].result]};return[...new Set([...a("title"),...a("content"),...a("tags")])].map((e=>{let n=t[e];return n.content=truncate(n.content,400),n.tags=n.tags.filter((e=>"gardenEntry"!=e&&"note"!=e)),n}))}window.lastSearch=""</script>
+<main class="content cm-s-obsidian">
+<header>
+<div class="header-meta">
+<div class="header-tags">
+</div>
+</div>
+</header>
+<p>以 <a href="https://github.com/bvaughn/js-search" target="_blank" class="external-link">https://github.com/bvaughn/js-search</a> 为例子</p>
+<p><picture src="/img/user/output/SDE%20up/attachments/NPM%20%E5%8E%9F%E7%90%86-20240729143226433.webp" alt="NPM 原理-20240729143226433.webp"><source media="(max-width:480px)" srcset="/img/optimized/ovmK90Ty_k-500.webp" type="image/webp">
+<source media="(max-width:480px)" srcset="/img/optimized/ovmK90Ty_k-500.jpeg">
+<source media="(max-width:1920px)" srcset="/img/optimized/ovmK90Ty_k-700.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/ovmK90Ty_k-700.jpeg"><img class="" src="/img/user/output/SDE%20up/attachments/NPM%20%E5%8E%9F%E7%90%86-20240729143226433.webp" alt="NPM 原理-20240729143226433.webp" width=""></picture></p>
+<p>可以找到<br>
+<picture src="/img/user/output/SDE%20up/attachments/NPM%20%E5%8E%9F%E7%90%86-20240729143540781.webp" alt="NPM 原理-20240729143540781.webp"><source media="(max-width:480px)" srcset="/img/optimized/EwPrTfrOoV-500.webp" type="image/webp">
+<source media="(max-width:480px)" srcset="/img/optimized/EwPrTfrOoV-500.jpeg">
+<source media="(max-width:1920px)" srcset="/img/optimized/EwPrTfrOoV-700.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/EwPrTfrOoV-700.jpeg"><img class="" src="/img/user/output/SDE%20up/attachments/NPM%20%E5%8E%9F%E7%90%86-20240729143540781.webp" alt="NPM 原理-20240729143540781.webp" width=""></picture></p>
+<p>但是另一个react项目中<br>
+会有一些 @开头的东西<br>
+<picture src="/img/user/output/SDE%20up/attachments/NPM%20%E5%8E%9F%E7%90%86-20240729143746740.webp" alt="NPM 原理-20240729143746740.webp"><source media="(max-width:480px)" srcset="/img/optimized/xqkI8X0Ma5-500.webp" type="image/webp">
+<source media="(max-width:480px)" srcset="/img/optimized/xqkI8X0Ma5-500.jpeg">
+<source media="(max-width:1920px)" srcset="/img/optimized/xqkI8X0Ma5-604.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/xqkI8X0Ma5-604.jpeg"><img class="" src="/img/user/output/SDE%20up/attachments/NPM%20%E5%8E%9F%E7%90%86-20240729143746740.webp" alt="NPM 原理-20240729143746740.webp" width=""></picture></p>
+<p><span style="color:red">这是静态类型检查 </span></p>
+<h1 id="when" tabindex="-1">When</h1>
+<p>什么时候会有</p>
+<p>在使用 npm 安装依赖包时，<code>@types</code> 包会被添加到 <code>node_modules</code> 目录中的几种情况如下：</p>
+<h3 id="1-code-types-code" tabindex="-1">1. 明确安装 <code>@types</code> 包</h3>
+<p>如果你在安装某个 JavaScript 库的同时，也明确地安装了该库的类型定义包，这个类型定义包（通常是以 <code>@types/</code> 前缀命名的）会被添加到 <code>node_modules</code> 目录中。例如，如果你安装了 <code>lodash</code> 和它的类型定义：</p>
+<pre><code class="language-bash">
+npm install lodash
+npm install --save-dev @types/lodash
+
+</code></pre>
+<p>这种情况下，<code>@types/lodash</code> 会出现在 <code>node_modules/@types</code> 目录下。</p>
+<h3 id="2" tabindex="-1">2. 库内置类型定义</h3>
+<p>有些库直接在其自身的 npm 包中包含了 TypeScript 类型定义文件。这些库不需要额外的 <code>@types</code> 包，因为它们的类型定义已经被内置在库的发布版本中。这些类型定义通常在库的 <code>package.json</code> 文件中通过 <code>types</code> 或 <code>typings</code> 字段指定。例如，如果你安装了这样一个库：</p>
+<pre><code class="language-bash">
+npm install some-library
+
+</code></pre>
+<p>并且该库内置了类型定义，你不需要安装任何 <code>@types/some-library</code>，类型定义已经随库一起被安装。</p>
+<h3 id="3" tabindex="-1">3. 间接依赖</h3>
+<p>如果你安装的某个库依赖于其他需要类型定义的库，这些依赖的库的类型定义（如果存在）也可能被自动安装。这取决于你安装的主库如何管理其类型依赖。如果主库在其 <code>package.json</code> 中列出了 <code>@types/</code> 依赖作为它的依赖之一，那么这些类型定义包也会被安装。</p>
+<h3 id="4" tabindex="-1">4. 开发依赖自动安装</h3>
+<p>在某些项目配置中，你可能在项目的 <code>package.json</code> 文件中已经包含了一系列开发依赖（包括各种 <code>@types</code> 包），当你运行 <code>npm install</code> 时，所有列出的依赖项都会被安装。</p>
+<h3 id="总结" tabindex="-1">总结</h3>
+<p><code>@types</code> 类型定义包的安装通常是为了在 TypeScript 项目中提供 JavaScript 库的类型信息，以支持类型检查和其他 TypeScript 功能。安装这些包可以是明确的（直接安装）或间接的（作为依赖或内置在库中）。在日常开发中，正确管理这些类型定义是维护 TypeScript 项目类型安全的重要方面。</p>
+<h2 id="没有的话想有怎么办" tabindex="-1">没有的话想有怎么办</h2>
+<p>自己写</p>
+<h2 id="有的话想没有怎么办" tabindex="-1">有的话想没有怎么办</h2>
+<h3 id="1-code-any-code" tabindex="-1">1. 使用 <code>any</code> 类型</h3>
+<p>最简单的方法是通过声明整个模块为 <code>any</code> 类型来绕过 TypeScript 的类型系统。这种方法非常快速，几乎不需要额外的代码或文件。你可以在项目的一个全局类型声明文件中添加如下内容：</p>
+<pre><code class="language-tsx">typescript复制代码
+// 在一个全局的 d.ts 文件，如 types.d.ts
+declare module 'example-library';
+
+</code></pre>
+<p>这行代码会使得 TypeScript 将 <code>example-library</code> 视为任意类型，从而不会对其内容进行类型检查。这样做的好处是简便，坏处是你失去了类型检查带来的很多好处，比如编码时的自动完成和错误检测。</p>
+<h3 id="2-type-script" tabindex="-1">2. 配置 TypeScript 编译器选项</h3>
+<p>如果你不想在你的项目中特别为某些库编写或维护类型声明，你可以通过修改 <code>tsconfig.json</code> 文件中的编译器选项来减少类型错误：</p>
+<pre><code class="language-json">json复制代码
+{
+  &quot;compilerOptions&quot;: {
+    &quot;skipLibCheck&quot;: true,
+    &quot;noImplicitAny&quot;: false}
+}
+
+</code></pre>
+<ul>
+<li><code>skipLibCheck</code>: 这个选项会让 TypeScript 编译器忽略所有第三方库文件（<code>.d.ts</code> 文件）的类型检查错误。这对于快速绕过错误的类型定义文件非常有用。</li>
+<li><code>noImplicitAny</code>: 设置为 <code>false</code> 可以允许 TypeScript 将没有明确指定类型的表达式和声明隐式地视为 <code>any</code> 类型，这减少了显式声明 <code>any</code> 的需要。</li>
+</ul>
+<h3 id="3-1" tabindex="-1">3. 评估是否更换库</h3>
+<p>如果一个库因为缺乏类型支持而导致在 TypeScript 项目中使用时遇到持续的问题，也可以考虑是否有其他更好的替代库，这些库可能已经有良好的 TypeScript 支持。选择一个社区支持更强、更新更频繁、内置类型声明的库，可能会减少很多开发中的麻烦。</p>
+<h1 id="why" tabindex="-1">Why</h1>
+<p>为什么会有 = 有什么好处</p>
+<p>引入类型检查，特别是在使用如 TypeScript 这样的静态类型语言时，可以带来多个明显的好处。下面我将解释为什么要加类型检查，并通过代码示例来展示这些好处。</p>
+<h3 id="为什么需要类型检查" tabindex="-1">为什么需要类型检查</h3>
+<ol>
+<li><strong>错误减少</strong>：类型检查可以在编译阶段捕捉错误，如类型不匹配、未定义的函数调用、参数错误等。这意味着很多潜在的运行时错误可以在代码运行前就被发现和解决。</li>
+<li><strong>代码质量提升</strong>：类型系统强制开发者在写代码时就思考数据的类型和结构，这促使开发者更深入地思考问题，从而写出更清晰和更可维护的代码。</li>
+<li><strong>自动化文档</strong>：类型定义本身就起到了文档的作用，明确地展示了函数期望的输入和输出。这使得代码更易于理解和使用，尤其是在团队协作中。</li>
+<li><strong>智能的代码补全</strong>：大多数支持 TypeScript 的开发环境（如 Visual Studio Code）提供了基于类型信息的智能代码补全、导航和重构工具，大大提高了开发效率。</li>
+</ol>
+<p>代码示例<br>
+假设我们有一个简单的 JavaScript 函数，用于处理用户信息，如果没有类型检查，可能写成这样：</p>
+<pre><code>function handleUserInfo(user) {
+    console.log(&quot;User Name: &quot; + user.name);
+    console.log(&quot;User Age: &quot; + user.age);
+}
+
+// 调用函数  不会报错
+handleUserInfo({ name: &quot;Alice&quot;, age: &quot;25&quot; });
+</code></pre>
+<p>在上面的 JavaScript 代码中，age 字段被错误地传入了一个字符串，而我们期望的是一个数字。这种错误在 JavaScript 中很常见，因为它是动态类型语言。</p>
+<p>在这段代码中，由于 <code>age</code> 传入了一个字符串 <code>&quot;25&quot;</code> 而不是数字，以下是可能的情况和影响：</p>
+<h3 id="1" tabindex="-1">1. 输出</h3>
+<p>在当前的函数实现中，<code>age</code> 被作为字符串处理并直接连接到另一个字符串，所以这个错误不会直接导致程序崩溃或者明显的运行时错误。输出将会是：</p>
+<pre><code class="language-sql">sql复制代码
+User Name: Alice
+User Age: 25
+
+</code></pre>
+<p>这看起来可能并没有什么问题，但这并不意味着数据是正确处理的。</p>
+<h3 id="2-1" tabindex="-1">2. 后续数值操作的影响</h3>
+<p>如果程序的其他部分期望 <code>age</code> 是一个数字，并在此基础上进行数值计算，比如计算年龄区间或者验证年龄是否在某个范围内，使用字符串就可能导致错误或不预期的行为。例如：</p>
+<pre><code class="language-jsx">javascript复制代码
+if (user.age &lt; 30) {
+    console.log(&quot;Under 30 years old.&quot;);
+} else {
+    console.log(&quot;30 years or older.&quot;);
+}
+
+</code></pre>
+<p>在 JavaScript 中，尝试对字符串和数字进行比较会导致 JavaScript 尝试将字符串转换为数字。在这种情况下，由于 <code>&quot;25&quot;</code> 是一个有效的数字字符串，它会被转换为数字 <code>25</code>，并正确地进行比较。但如果字符串不是有效的数字（如 <code>&quot;twenty-five&quot;</code>），则比较的结果会是 <code>NaN</code> (Not a Number)，这会使得条件判断失败，导致逻辑上的错误。<br>
+现在，我们用 TypeScript 来改写上述代码，并加入类型检查：</p>
+<pre><code>interface User {
+    name: string;
+    age: number;
+}
+
+function handleUserInfo(user: User) {
+    console.log(&quot;User Name: &quot; + user.name);
+    console.log(&quot;User Age: &quot; + user.age);
+}
+// 尝试调用函数
+handleUserInfo({ name: &quot;Alice&quot;, age: &quot;25&quot; });  // TypeScript 会在这里报错
+</code></pre>
+<p>在 TypeScript 版本中，我们定义了一个 User 接口来指定 user 参数的结构，包括类型信息。如果尝试像之前那样错误地传递一个字符串作为年龄，TypeScript 编译器将会在编译时抛出错误，提示我们 age 的类型不匹配。这样的类型检查可以防止我们在代码进一步执行之前犯下可能导致运行时错误的低级错误。</p>
+<h1 id="webpack" tabindex="-1">webpack</h1>
+<p>如果想要查看源码的问题的话</p>
+<ul>
+<li><code>&quot;require&quot;: &quot;./dist/umd/js-search.js&quot;</code>：如果包是通过 <code>require()</code>（即 CommonJS 方式）被导入，那么将使用 <code>./dist/umd/js-search.js</code>。</li>
+<li><code>&quot;import&quot;: &quot;./dist/esm/js-search.js&quot;</code>：如果包是通过 ES6 <code>import</code> 语句被导入，那么将使用 <code>./dist/esm/js-search.js</code>。</li>
+</ul>
+<p><picture src="/img/user/output/SDE%20up/attachments/NPM%20%E5%8E%9F%E7%90%86-20240729170932499.webp" alt="NPM 原理-20240729170932499.webp"><source media="(max-width:480px)" srcset="/img/optimized/RwBk4hAbJE-500.webp" type="image/webp">
+<source media="(max-width:480px)" srcset="/img/optimized/RwBk4hAbJE-500.jpeg">
+<source media="(max-width:1920px)" srcset="/img/optimized/RwBk4hAbJE-679.webp" type="image/webp"><source media="(max-width:1920px)" srcset="/img/optimized/RwBk4hAbJE-679.jpeg"><img class="" src="/img/user/output/SDE%20up/attachments/NPM%20%E5%8E%9F%E7%90%86-20240729170932499.webp" alt="NPM 原理-20240729170932499.webp" width=""></picture></p>
+<h1 id="require-import" tabindex="-1">require和 import的区别是什么</h1>
+<h3 id="语法" tabindex="-1">语法</h3>
+<ul>
+<li>
+<p><strong>require()</strong>：</p>
+<ul>
+<li>CommonJS 模块使用 <code>require()</code> 函数来加载模块。</li>
+<li>语法较为简单，主要用在 Node.js 中。</li>
+<li>示例：<code>const lodash = require('lodash');</code></li>
+</ul>
+</li>
+<li>
+<p><strong>import</strong>：</p>
+<ul>
+<li>ES6 模块使用 <code>import</code> 语句来导入模块。</li>
+<li>支持更复杂的导入方式，如导入单个函数、多个函数、或重命名。</li>
+<li>示例：<code>import { map, reduce } from 'lodash';</code> 或 <code>import * as lodash from 'lodash';</code></li>
+</ul>
+</li>
+</ul>
+</main>
+<aside>
+<div class="sidebar">
+<div class="sidebar-container">
+<div class="toc">
+<div class="toc-title-container">
+<div class="toc-title">
+On this page
+</div>
+</div>
+<div class="toc-container">
+<nav class="toc">
+<ol>
+<li><a href="#when">When</a>
+<ol>
+<li><a href="#1-code-types-code">1. 明确安装 @types 包</a>
+</li>
+<li><a href="#2">2. 库内置类型定义</a>
+</li>
+<li><a href="#3">3. 间接依赖</a>
+</li>
+<li><a href="#4">4. 开发依赖自动安装</a>
+</li>
+<li><a href="#总结">总结</a>
+</li>
+<li><a href="#没有的话想有怎么办">没有的话想有怎么办</a>
+</li>
+<li><a href="#有的话想没有怎么办">有的话想没有怎么办</a>
+<ol>
+<li><a href="#1-code-any-code">1. 使用 any 类型</a>
+</li>
+<li><a href="#2-type-script">2. 配置 TypeScript 编译器选项</a>
+</li>
+<li><a href="#3-1">3. 评估是否更换库</a>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#why">Why</a>
+<ol>
+<li><a href="#为什么需要类型检查">为什么需要类型检查</a>
+</li>
+<li><a href="#1">1. 输出</a>
+</li>
+<li><a href="#2-1">2. 后续数值操作的影响</a>
+</li>
+</ol>
+</li>
+<li><a href="#webpack">webpack</a>
+</li>
+<li><a href="#require-import">require和 import的区别是什么</a>
+<ol>
+<li><a href="#语法">语法</a>
+</li>
+</ol>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<div class="backlinks">
+<div class="backlink-title" style="margin:4px 0!important">Pages mentioning this page</div>
+<div class="backlink-list"><div class="backlink-card">
+<span class="no-backlinks-message">No other pages mentions this page</span>
+</div></div>
+</div>
+</div>
+</div>
+</aside>
+<style>#tooltip-wrapper{background:var(--background-primary);padding:1em;border-radius:4px;overflow:hidden;position:fixed;width:80%;max-width:400px;height:auto;max-height:300px;font-size:.8em;box-shadow:0 5px 10px rgba(0,0,0,.1);opacity:0;transition:opacity .1s;unicode-bidi:plaintext;overflow-y:scroll;z-index:10}#tooltip-wrapper:after{content:"";position:absolute;z-index:1;bottom:0;left:0;pointer-events:none;width:100%;unicode-bidi:plaintext;height:75px}</style>
+<div style="opacity:0;display:none" id="tooltip-wrapper">
+<div id="tooltip-content">
+</div>
+</div>
+<iframe style="display:none;height:0;width:0" id="link-preview-iframe" src="">
+</iframe>
+<script>var opacityTimeout,contentTimeout,transitionDurationMs=100,iframe=document.getElementById("link-preview-iframe"),tooltipWrapper=document.getElementById("tooltip-wrapper"),tooltipContent=document.getElementById("tooltip-content"),linkHistories={};function hideTooltip(){opacityTimeout=setTimeout((function(){tooltipWrapper.style.opacity=0,contentTimeout=setTimeout((function(){tooltipContent.innerHTML="",tooltipWrapper.style.display="none"}),transitionDurationMs+1)}),transitionDurationMs)}function showTooltip(t){var e=t.target,o=e.getClientRects()[e.getClientRects().length-1],i=window.pageYOffset||document.documentElement.scrollTop,n=t.target.getAttribute("href");if(-1===n.indexOf("http")||-1!==n.indexOf(window.location.host)){let t=n.split("#")[0];linkHistories[t]?(tooltipContent.innerHTML=linkHistories[t],tooltipWrapper.style.display="block",setTimeout((function(){if(tooltipWrapper.style.opacity=1,-1!=n.indexOf("#")){let t=n.split("#")[1];const e=tooltipWrapper.querySelector(`[id='${t}']`);e.classList.add("referred"),e.scrollIntoView({behavior:"smooth"},!0)}else tooltipWrapper.scroll(0,0)}),1)):(iframe.src=t,iframe.onload=function(){tooltipContentHtml="",tooltipContentHtml+='<div style="font-weight: bold; unicode-bidi: plaintext;">'+iframe.contentWindow.document.querySelector("h1").innerHTML+"</div>",tooltipContentHtml+=iframe.contentWindow.document.querySelector(".content").innerHTML,tooltipContent.innerHTML=tooltipContentHtml,linkHistories[t]=tooltipContentHtml,tooltipWrapper.style.display="block",tooltipWrapper.scrollTop=0,setTimeout((function(){if(tooltipWrapper.style.opacity=1,-1!=n.indexOf("#")){let t=n.split("#")[1];const e=tooltipWrapper.querySelector(`[id='${t}']`);e.classList.add("referred"),console.log(e),e.scrollIntoView({behavior:"smooth"},!0)}else tooltipWrapper.scroll(0,0)}),1)}),tooltipWrapper.style.left=o.left-tooltipWrapper.offsetWidth/2+o.width/2+"px",window.innerHeight-o.top<tooltipWrapper.offsetHeight?tooltipWrapper.style.top=o.top+i-tooltipWrapper.offsetHeight-10+"px":window.innerHeight-o.top>tooltipWrapper.offsetHeight&&(tooltipWrapper.style.top=o.top+i+35+"px"),o.left+o.width/2<tooltipWrapper.offsetWidth/2?tooltipWrapper.style.left="10px":document.body.clientWidth-o.left-o.width/2<tooltipWrapper.offsetWidth/2&&(tooltipWrapper.style.left=document.body.clientWidth-tooltipWrapper.offsetWidth-20+"px")}}function setupListeners(t){t.addEventListener("mouseleave",(function(t){hideTooltip()})),tooltipWrapper.addEventListener("mouseleave",(function(t){hideTooltip()})),t.addEventListener("mouseenter",(function(t){clearTimeout(opacityTimeout),clearTimeout(contentTimeout),showTooltip(t)})),tooltipWrapper.addEventListener("mouseenter",(function(t){clearTimeout(opacityTimeout),clearTimeout(contentTimeout)}))}window.addEventListener("load",(function(t){document.querySelectorAll(".internal-link").forEach(setupListeners),document.querySelectorAll(".backlink-card a").forEach(setupListeners)}))</script>
+<script>window.location.hash&&document.getElementById(window.location.hash.slice(1)).classList.add("referred"),window.addEventListener("hashchange",(e=>{const t=e.oldURL.split("#");t[1]&&document.getElementById(t[1]).classList.remove("referred");const n=e.newURL.split("#");n[1]&&document.getElementById(n[1]).classList.add("referred")}),!1);const url_parts=window.location.href.split("#"),url=url_parts[0],referrence=url_parts[1];document.querySelectorAll(".cm-s-obsidian > *[id]").forEach((function(e){e.ondblclick=function(e){const t=url+"#"+e.target.id;navigator.clipboard.writeText(t)}}))</script>
+<script src="https://fastly.jsdelivr.net/npm/luxon@3.2.1/build/global/luxon.min.js"></script>
+<script defer="defer">TIMESTAMP_FORMAT="MMM dd, yyyy h:mm a",document.querySelectorAll(".human-date").forEach((function(e){date=e.getAttribute("data-date")||e.innerText,parsed_date=luxon.DateTime.fromISO(date),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromSQL(date)),null!=parsed_date.invalid&&(parsed_date=luxon.DateTime.fromHTML(date)),e.innerHTML=parsed_date.toFormat(TIMESTAMP_FORMAT)}))</script>
+<script>lucide.createIcons({attrs:{class:["svg-icon"]}})</script>
+</body>
+</html>
